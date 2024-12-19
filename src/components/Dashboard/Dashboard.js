@@ -8,6 +8,8 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useDispatch, useSelector } from "react-redux";
 import { getApplyJobByUser } from "../../redux/ApplyJob/applyJob.action";
 import Pagination from "../layout/Pagination";
+import { formatDateTime } from '../../utils/dateUtils';
+
 export default function Dashboard_Seeker() {
   const dispatch = useDispatch();
   const {
@@ -63,13 +65,6 @@ export default function Dashboard_Seeker() {
           <h2 className="text-lg font-semibold mb-4">Lịch sử ứng tuyển</h2>
           <div className="space-y-4">
             {applyJobByUser.map((app) => {
-              const applyDate = new Date(app.applyDate);
-              const formattedDate = applyDate.toLocaleDateString("en-GB");
-              const formattedTime = applyDate.toLocaleTimeString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-              });
-
               return (
                 <div key={app.postId} className="flex justify-between p-5 bg-gradient-to-r from-white via-gray-100 to-gray-50 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
                   <Link
@@ -105,7 +100,7 @@ export default function Dashboard_Seeker() {
                           {app.companyName} • {app.location} • {app.typeOfWork}
                         </p>
                         <span className="text-sm text-gray-500">
-                          Thời gian ứng tuyển: {formattedDate} {formattedTime}
+                          Thời gian ứng tuyển: {formatDateTime(app.applyDate)}
                         </span>
                       </div>
                     </div>

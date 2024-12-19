@@ -975,42 +975,6 @@ export default function MyProfile() {
                 </div>
               )}
             </Card>
-
-            {/* Social Links */}
-            <Card className="bg-white shadow-md">
-              <CardHeader className="flex flex-row items-center justify-between">
-                <h3 className="text-lg  text-purple-600 font-semibold">
-                  Liên kết xã hội
-                </h3>
-                <Button size="icon" variant="ghost">
-                  <Edit className="h-4 w-4" />
-                </Button>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {seeker.socialLinks &&
-                Array.isArray(seeker.socialLinks) &&
-                seeker.socialLinks.length > 0 ? (
-                  seeker.socialLinks.map((link, index) => (
-                    <div key={index}>
-                      <Label className="text-sm font-medium">
-                        {link.socialName}
-                      </Label>
-                      <br />
-                      <a
-                        href={link.link}
-                        className="text-sm text-blue-600"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.link}
-                      </a>
-                    </div>
-                  ))
-                ) : (
-                  <div>Không có liên kết xã hội nào</div> // Hiển thị thông báo nếu không có liên kết mạng xã hội
-                )}
-              </CardContent>
-            </Card>
           </div>
         </div>
       </main>

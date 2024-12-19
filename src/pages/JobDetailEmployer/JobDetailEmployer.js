@@ -25,6 +25,9 @@ import { Badge } from "@mui/material";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getCity } from "../../redux/City/city.action";
+import { calculateRemainingDays } from '../../utils/dateUtils';
+import { formatDate } from '../../utils/dateUtils';
+import { formatDateForInput } from '../../utils/dateUtils';
 const cityCodeMapping = {
   1: 16,    // Hà Nội
   2: 1,     // Hà Giang 
@@ -313,7 +316,7 @@ const JobDetailEmployer = () => {
     }
 
     try {
-      // Lấy tên đầy đủ của các địa điểm đã chọn
+      // Lấy tên đầy đủ của các ịa đi���m đã chọn
       const selectedProvinceData = provinces.find(p => p.code === Number(selectedProvince));
       const selectedDistrictData = districts.find(d => d.code === Number(selectedDistrict));
       const selectedWardData = wards.find(w => w.code === Number(selectedWard));
@@ -396,14 +399,7 @@ const JobDetailEmployer = () => {
 
   // Tạo hàm tính toán và format thời gian còn lại
   const getRemainingTime = () => {
-    const currentDate = new Date();
-    const expireDate = new Date(detailJob?.expireDate);
-    const remainingDays = Math.ceil((expireDate - currentDate) / (1000 * 60 * 60 * 24));
-    
-    if (remainingDays <= 0) {
-      return "Đã hết hạn";
-    }
-    return `Còn: ${remainingDays} ngày`;
+    return calculateRemainingDays(detailJob?.expireDate);
   };
 
   
@@ -626,7 +622,7 @@ const JobDetailEmployer = () => {
             <Calendar className="w-4 h-4" />
             Đã đăng:
             <span>
-              {new Date(detailJob?.createDate).toLocaleDateString("vi-VN")}
+              {formatDate(detailJob?.createDate)}
             </span>
           </span>
 
@@ -634,10 +630,7 @@ const JobDetailEmployer = () => {
 
             {new Date(detailJob?.expireDate) < new Date()
               ? null
-              : `Còn: ${Math.ceil(
-                  (new Date(detailJob?.expireDate) - new Date()) /
-                    (1000 * 60 * 60 * 24)
-                )} ngày`}
+              : `Còn: ${calculateRemainingDays(detailJob?.expireDate)} ngày`}
 
           </span>
         </div>
@@ -762,16 +755,14 @@ const JobDetailEmployer = () => {
                 {isEditing ? (
                   <input
                     type="date"
-                    value={jobData.expireDate}
+                    value={formatDateForInput(jobData.expireDate)}
                     onChange={handleChange}
                     name="expireDate"
                     className="border p-1 rounded"
                   />
                 ) : (
                   <span className="font-medium">
-                    {new Date(detailJob?.expireDate).toLocaleDateString(
-                      "vi-VN"
-                    )}
+                    {formatDate(detailJob?.expireDate)}
                   </span>
                 )}
               </div>

@@ -18,6 +18,8 @@ import {
 import { validateTaxCode } from "../../redux/Company/company.action";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
+import { formatDate } from "../../utils/dateUtils";
+import { convertToVNTimezone } from '../../utils/dateUtils';
 
 const JobManagement = () => {
   const work = [
@@ -98,7 +100,7 @@ const JobManagement = () => {
         size
       )
     );
-    toast.success("Dừng tuyển dụng công việc thành công");
+    toast.success("Dừng tuyển dụng công vi��c thành công");
   };
 
   useEffect(() => {
@@ -143,7 +145,7 @@ const JobManagement = () => {
   //     // Tạo một đối tượng mới với tất cả các cột đã được đặt lại thành null
   //     const newSort = prevState[column] === "ASC" ? "DESC" : "ASC";
   //     const newState = {
-  //       [column]: newSort, // Cập nhật giá trị của cột hiện tại
+  //       [column]: newSort, // Cập nhật giá tr�� của ct hiện tại
   //     };
 
   //     // Đặt các cột còn lại thành null
@@ -285,20 +287,8 @@ const JobManagement = () => {
                       {job.status}
                     </span>
                   </td>
-                  <td className="p-4">
-                    {new Date(job?.createDate).toLocaleString("vi-VN", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                    })}
-                  </td>
-                  <td className="p-4">
-                    {new Date(job?.expireDate).toLocaleString("vi-VN", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                    })}
-                  </td>
+                  <td className="p-4">{formatDate(job?.createDate)}</td>
+                  <td className="p-4">{formatDate(job?.expireDate)}</td>
                   <td className="p-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-600">
                       {job?.typeOfWork}
@@ -324,7 +314,7 @@ const JobManagement = () => {
                           style={{
                             display:
                               job.expireDate &&
-                              new Date(job.expireDate) < new Date()
+                              convertToVNTimezone(job.expireDate) < convertToVNTimezone(new Date())
                                 ? "none"
                                 : "block",
                           }}

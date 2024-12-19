@@ -21,6 +21,7 @@ import { getEduCandidate } from "../../redux/Education/edu.action";
 import { getExpCandidate } from "../../redux/Experience/exp.action";
 import { Card } from "../../ui/card";
 import { getCandidateApplyInfo } from "../../redux/ApplyJob/applyJob.action";
+import { formatDate } from "../../utils/dateUtils";
 
 const ApplicantDetail = () => {
   const getRandomColor = () => {
@@ -368,11 +369,7 @@ const ApplicantDetail = () => {
                                   </div>
                                   <div className="text-sm text-gray-600">
                                     <strong>Ngày kết thúc: </strong>
-                                    {exp.endDate
-                                      ? new Date(
-                                          exp.endDate
-                                        ).toLocaleDateString("vi-VN")
-                                      : "Hiện tại"}
+                                    {exp.endDate ? formatDate(exp.endDate) : "Hiện tại"}
                                   </div>
 
                                   {/* Mô tả */}
@@ -422,11 +419,7 @@ const ApplicantDetail = () => {
                                   </div>
                                   <div className="text-sm text-gray-600">
                                     <strong>Ngày kết thúc: </strong>
-                                    {edu?.endDate
-                                      ? new Date(
-                                          edu.endDate
-                                        ).toLocaleDateString("vi-VN")
-                                      : "Hiện tại"}
+                                    {edu?.endDate ? formatDate(edu.endDate) : "Hiện tại"}
                                   </div>
 
                                   {/* Major */}
