@@ -27,7 +27,7 @@ export default function Top8Job() {
         </h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {top8Job.length > 0 ? (
+        {Array.isArray(top8Job) && top8Job.length > 0 ? (
           top8Job.map((job) => (
             <JobCard
               key={job.postId}
