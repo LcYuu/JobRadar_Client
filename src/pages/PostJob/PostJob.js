@@ -30,7 +30,6 @@ import Swal from "sweetalert2";
 import { 
   formatDate, 
   formatDateTime, 
-  formatDateCustom, 
   calculateRemainingDays,
   convertToVNTimezone 
 } from '../../utils/dateUtils';

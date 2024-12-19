@@ -34,7 +34,7 @@ import {
   checkIfApplied,
   getOneApplyJob,
 } from "../../redux/ApplyJob/applyJob.action";
-import { formatDateCustom } from '../../utils/dateUtils';
+import { formatDate } from '../../utils/dateUtils';
 
 export default function JobDetail() {
   const industryStyles = {
@@ -236,7 +236,7 @@ export default function JobDetail() {
               {oneApplyJob && (
                 <div className="flex items-center space-x-2 mt-4">
                   <p className="text-sm text-purple-600">
-                    Đơn ứng tuyển đã được cập nhật vào lúc {formatDateCustom(oneApplyJob.applyDate, {
+                    Đơn ứng tuyển đã được cập nhật vào lúc {formatDate(oneApplyJob.applyDate, {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
@@ -447,7 +447,7 @@ export default function JobDetail() {
                       <span>Ngày đăng bài</span>
                     </div>
                     <span className="font-medium">
-                      {postByPostId?.createDate ? formatDateCustom(postByPostId.createDate, {
+                      {postByPostId?.createDate ? formatDate(postByPostId.createDate, {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'

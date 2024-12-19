@@ -169,7 +169,7 @@ export default function SignInForm() {
 
       if (emailExists.data) {
         setTimeout(() => {
-          window.location.href = "https://jobradar-one.vercel.app/";
+          window.location.href = process.env.APP_URL;
         }, 1000);
       } else {
         const defaultAddress = {
@@ -181,7 +181,7 @@ export default function SignInForm() {
         sessionStorage.setItem("defaultAddress", JSON.stringify(defaultAddress));
         
         setTimeout(() => {
-          window.location.href = "https://jobradar-one.vercel.app/role-selection";
+          window.location.href = process.env.APP_URL + "/role-selection";
         }, 1000);
       }
     } catch (err) {
