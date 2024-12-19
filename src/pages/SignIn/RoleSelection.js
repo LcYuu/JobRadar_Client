@@ -30,7 +30,7 @@ const RoleSelection = () => {
         setIsModalOpen(true);
 
         setTimeout(() => {
-          window.location.href = "http://localhost:3000/"; // Redirect về trang chủ
+          window.location.href = "https://jobradar-one.vercel.app/"; // Redirect về trang chủ
         }, 1000);
       })
       .catch(() => {
