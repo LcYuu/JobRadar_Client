@@ -34,6 +34,7 @@ import {
   checkIfApplied,
   getOneApplyJob,
 } from "../../redux/ApplyJob/applyJob.action";
+import { formatDateCustom } from '../../utils/dateUtils';
 
 export default function JobDetail() {
   const industryStyles = {
@@ -235,15 +236,11 @@ export default function JobDetail() {
               {oneApplyJob && (
                 <div className="flex items-center space-x-2 mt-4">
                   <p className="text-sm text-purple-600">
-                    Đơn ứng tuyển đã được cập nhật vào lúc{" "}
-                    {new Date(oneApplyJob.applyDate).toLocaleDateString(
-                      "vi-VN",
-                      {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      }
-                    )}
+                    Đơn ứng tuyển đã được cập nhật vào lúc {formatDateCustom(oneApplyJob.applyDate, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
                   </p>
                   {oneApplyJob.pathCV && (
                     <a
@@ -450,16 +447,11 @@ export default function JobDetail() {
                       <span>Ngày đăng bài</span>
                     </div>
                     <span className="font-medium">
-                      {postByPostId?.createDate
-                        ? new Date(postByPostId.createDate).toLocaleDateString(
-                            "vi-VN",
-                            {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            }
-                          )
-                        : "N/A"}
+                      {postByPostId?.createDate ? formatDateCustom(postByPostId.createDate, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      }) : "N/A"}
                     </span>
                   </div>
 

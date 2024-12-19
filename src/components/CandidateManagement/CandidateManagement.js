@@ -20,6 +20,7 @@ import {
   getJobsByCompany,
 } from "../../redux/JobPost/jobPost.action";
 import { toast } from "react-toastify";
+import { formatDateTime } from '../../utils/dateUtils';
 const CandidateManagement = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -211,16 +212,7 @@ const CandidateManagement = () => {
                       {candidate?.isSave ? "Đã duyệt" : "Chưa duyệt"}
                     </span>
                   </td>
-                  <td className="p-4">
-                    {new Date(candidate?.applyDate).toLocaleString("vi-VN", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                    })}
-                  </td>
+                  <td className="p-4">{formatDateTime(candidate?.applyDate)}</td>
                   <td>
                     <Link
                       to={`/employer/jobs/${candidate?.postId}`}

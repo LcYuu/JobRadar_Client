@@ -20,7 +20,7 @@ import { isStrongPassword } from "../../utils/passwordValidator";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { API_BASE_URL } from "../../configs/api";
 // Update Modal component
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
@@ -153,7 +153,7 @@ export default function SignInForm() {
       console.log("Google Token: ", googleToken);
 
       // Gửi googleToken đến backend để xác thực
-      const res = await axios.post("https://jobradarsv-production.up.railway.app/auth/login/google", {
+      const res = await axios.post(`${API_BASE_URL}/auth/login/google`, {
         token: googleToken,
       });
 
@@ -163,13 +163,13 @@ export default function SignInForm() {
 
       sessionStorage.setItem("jwt", jwtToken);
       const emailExists = await axios.post(
-        "https://jobradarsv-production.up.railway.app/auth/check-email",
+        `${API_BASE_URL}/auth/check-email`,
         { token: googleToken }
       );
 
       if (emailExists.data) {
         setTimeout(() => {
-          window.location.href = "http://localhost:3000/";
+          window.location.href = "https://jobradar-one.vercel.app/";
         }, 1000);
       } else {
         const defaultAddress = {
@@ -181,7 +181,7 @@ export default function SignInForm() {
         sessionStorage.setItem("defaultAddress", JSON.stringify(defaultAddress));
         
         setTimeout(() => {
-          window.location.href = "http://localhost:3000/role-selection";
+          window.location.href = "https://jobradar-one.vercel.app/role-selection";
         }, 1000);
       }
     } catch (err) {

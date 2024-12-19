@@ -22,6 +22,7 @@ import {
 } from "../../../ui/dropdown-menu";
 import { Input } from "../../../ui/input";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from '../../../utils/dateUtils';
 
 export default function AdminJobList() {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ export default function AdminJobList() {
   return (
     <div className="space-y-6 mt-8">
       <div className="bg-white rounded-lg shadow">
-        <div className="flex justify-between items-center p-4 border-b">Thông tin liên hệ trên form
+        <div className="flex justify-between items-center p-4 border-b">
           <h2 className="font-semibold">
             Tổng số công việc ({totalElements})
           </h2>
@@ -165,12 +166,8 @@ export default function AdminJobList() {
                       {job.status === "Đang mở" ? "Đang mở" : "Hết hạn"}
                     </span>
                   </td>
-                  <td className="p-4">
-                    {new Date(job.createDate).toLocaleDateString("vi-VN")}
-                  </td>
-                  <td className="p-4">
-                    {new Date(job.expireDate).toLocaleDateString("vi-VN")}
-                  </td>
+                  <td className="p-4">{formatDate(job.createDate)}</td>
+                  <td className="p-4">{formatDate(job.expireDate)}</td>
                   <td className="p-4">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

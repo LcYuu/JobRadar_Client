@@ -108,7 +108,7 @@ export default function SignUpForm() {
 
     try {
       // Gọi API đăng ký cơ bản
-      const response = await axios.post("https://jobradarsv-production.up.railway.app/auth/signup", userData);
+      const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
       
       if (response.status === 200) {
         setIsModalOpen(true);
@@ -203,7 +203,7 @@ export default function SignUpForm() {
   const handleResendCode = async (e) => {
     e.preventDefault();
     try {
-      await axios.put("${API_BASE_URL}/auth/regenerate-otp", null, {
+      await axios.put(`${API_BASE_URL}/auth/regenerate-otp`, null, {
         params: { email: resendEmail },
         // Here you would trigger the backend logic to resend the confirmation code to the new email
       });

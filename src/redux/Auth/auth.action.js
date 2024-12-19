@@ -27,7 +27,7 @@ export const signupAction = (userData) => async (dispatch) => {
   dispatch({ type: SIGNUP_REQUEST });
   try {
     console.log("Sending signup data:", userData);
-    const response = await axios.post("https://jobradarsv-production.up.railway.app/auth/signup", userData);
+    const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
     console.log("Signup response received:", response.data);
     dispatch({ type: SIGNUP_SUCCESS, payload: response.data });
     return { success: true, data: response.data };
@@ -42,19 +42,19 @@ export const signupAction = (userData) => async (dispatch) => {
 export const loginAction = (loginData) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
-    const { data } = await axios.post(`https://jobradarsv-production.up.railway.app/auth/login`, loginData);
+    const { data } = await axios.post(`${API_BASE_URL}/auth/login`, loginData);
 
     if (data.token) {
       sessionStorage.setItem("jwt", data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: data.token });
       
-      const profileResponse = await axios.get(`https://jobradarsv-production.up.railway.app/users/profile`, {
+      const profileResponse = await axios.get(`${API_BASE_URL}/users/profile`, {
         headers: {
           Authorization: `Bearer ${data.token}`,
         },
       });
       
-      const roleResponse = await axios.get(`https://jobradarsv-production.up.railway.app/auth/user-role`, {
+      const roleResponse = await axios.get(`${API_BASE_URL}/auth/user-role`, {
         headers: {
           Authorization: `Bearer ${data.token}`,
         },

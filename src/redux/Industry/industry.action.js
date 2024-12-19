@@ -56,7 +56,7 @@ export const getIndustryCount = () => async (dispatch) => {
 export const getAllIndustries = () => async (dispatch) => {
     dispatch({ type: GET_ALL_INDUSTRIES_REQUEST });
     try {
-        const response = await axios.get('${API_BASE_URL}/industry/get-all');
+        const response = await axios.get(`${API_BASE_URL}/industry/get-all`);
         // Lọc bỏ các ngành nghề có giá trị null hoặc "None"
         const validIndustries = response.data.filter(industry => 
             industry.industryName && 

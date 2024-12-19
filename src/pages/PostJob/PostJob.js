@@ -27,6 +27,13 @@ import { createJobPost } from "../../redux/JobPost/jobPost.action";
 import { store } from "../../redux/store";
 import { getCity } from "../../redux/City/city.action";
 import Swal from "sweetalert2";
+import { 
+  formatDate, 
+  formatDateTime, 
+  formatDateCustom, 
+  calculateRemainingDays,
+  convertToVNTimezone 
+} from '../../utils/dateUtils';
 
 const cityCodeMapping = {
   1: 16, // Hà Nội
@@ -311,15 +318,14 @@ const PostJob = () => {
         isValid = false;
       }
 
-      if (!jobData.expireDate || isNaN(Date.parse(jobData.expireDate))) {
+      if (!jobData.expireDate) {
         tempErrors.expireDate = "Vui lòng chọn ngày hết hạn.";
         isValid = false;
       } else {
-        const expireDate = new Date(jobData.expireDate);
-        const currentDate = new Date(); // Lấy thời gian hiện tại
-
-        // Kiểm tra nếu ngày hết hạn phải lớn hơn ngày hiện tại
-        if (expireDate <= currentDate) {
+        const vnExpireDate = convertToVNTimezone(jobData.expireDate);
+        const vnNow = convertToVNTimezone(new Date());
+        
+        if (vnExpireDate <= vnNow) {
           tempErrors.expireDate = "Ngày hết hạn phải lớn hơn ngày hiện tại.";
           isValid = false;
         }
@@ -352,7 +358,7 @@ const PostJob = () => {
 
       if (!jobData.experience || jobData.experience <= 0) {
         tempErrors.experience =
-          "Yêu cầu kinh nghiệm không được để trống và lớn hơn 0";
+          "Yêu cầu kinh nghiệm không được để trống và lớn h��n 0";
         isValid = false;
       }
 
@@ -753,7 +759,7 @@ const handleSubmitJob = async (e) => {
                         ...jobData,
                         experience: experienceValue
                           ? `${experienceValue} năm`
-                          : "", // Lưu giá trị dạng chuỗi với "năm"
+                          : "", // Lưu giá trị dạng chuỗi v���i "năm"
                       });
                     }}
                     placeholder="Enter years of experience"
@@ -878,7 +884,7 @@ const handleSubmitJob = async (e) => {
 
                 <div>
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Quận/Huyện
+                    Quận/Huy���n
                   </label>
                   <select
                     required
