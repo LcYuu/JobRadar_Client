@@ -25,6 +25,11 @@ const CategoryList = () => {
   useEffect(() => {
     dispatch(getIndustry());
   }, [dispatch]);
+
+  if (!Array.isArray(industries)) {
+    return <div>No industries available</div>;
+  }
+
   return (
     <>
       <h2 className="text-2xl font-bold" style={{ color: "#43bfb3" }}>
