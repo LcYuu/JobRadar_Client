@@ -1,0 +1,59 @@
+.job-type-badge {
+  background-color: rgba(128, 0, 128, 0.1); /* Màu nền tím */
+  color: purple; /* Màu chữ tím */
+  border: 1px solid purple; /* Màu viền tím */
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Thay đổi sang cubic-bezier để mượt hơn */
+}
+
+.job-type-badge:hover {
+  background-color: purple; /* Màu nền khi hover là tím */
+  color: white; /* Màu chữ trắng khi hover */
+}
+
+.location-ellipsis {
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Thời gian chuyển đổi mượt mà hơn */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Di chuyển cao hơn một chút */
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25); /* Đổ bóng nổi bật hơn */
+  border-color: rgba(128, 0, 128, 0.5); /* Màu viền tím */
+  border-width: 2px;
+  border-style: solid;
+}
+
+.card-header {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              border 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Hiệu ứng chuyển đổi đồng nhất */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card:hover .card-header {
+  background-color: rgba(128, 0, 128, 0.05); /* Màu nền khi hover là tím nhạt */
+}
+
+.card-content {
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .card-content {
+  color: purple; /* Màu chữ tím khi hover */
+  transform: scale(1.03); /* Phóng chữ thêm một chút */
+}
