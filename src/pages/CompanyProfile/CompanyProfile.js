@@ -252,17 +252,25 @@ Bạn có chắc chắn muốn thay đổi đánh giá không?`;
   }, [dispatch, currentPage, size, companyId]);
 
   const handleFollowClick = async () => {
+    // Kiểm tra đăng nhập
+    const isLoggedIn = sessionStorage.getItem("token");
+    
+    if (!isLoggedIn) {
+      toast.error("Vui lòng đăng nhập để theo dõi công ty!");
+      navigate("/login"); // Chuyển hướng đến trang đăng nhập
+      return;
+    }
+
     try {
       await dispatch(followCompany(companyId));
-      setIsFollowing((prevState) => !prevState); // Đảo trạng thái
+      setIsFollowing((prevState) => !prevState);
       const mess = isFollowing
         ? "Bỏ theo dõi thành công!"
         : "Theo dõi thành công!";
       toast(mess);
     } catch (error) {
-      // Xử lý lỗi nếu có
       console.error("Có lỗi xảy ra khi theo dõi công ty:", error);
-      toast("Có lỗi xảy ra, vui lòng thử lại!");
+      toast.error("Có lỗi xảy ra, vui lòng thử lại!");
     }
   };
 
