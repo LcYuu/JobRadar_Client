@@ -50,6 +50,8 @@ import {
 } from "../../redux/Review/review.action";
 import anonymousIcon from "../../assets/icons/anonymous.png";
 import Swal from "sweetalert2";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
+
 const RatingStars = React.memo(({ value, onChange, readOnly = false }) => {
   return (
     <div className="flex">
@@ -257,7 +259,7 @@ Bạn có chắc chắn muốn thay đổi đánh giá không?`;
     
     if (!isLoggedIn) {
       toast.error("Vui lòng đăng nhập để theo dõi công ty!");
-      navigate("/login"); // Chuyển hướng đến trang đăng nhập
+      navigate("/auth/sign-in"); 
       return;
     }
 
@@ -428,12 +430,31 @@ Bạn có chắc chắn muốn thay đổi đánh giá không?`;
                 <span>{companyProfile?.industry?.industryName}</span>
               </div>
             </div>
-            <Button
-              onClick={handleFollowClick}
-              className="mt-6 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700"
-            >
-              {isFollowing ? "Bỏ theo dõi" : "Theo dõi"}
-            </Button>
+            <div className="mt-6">
+              {user ? (
+                <Button
+                  onClick={handleFollowClick}
+                  className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700"
+                >
+                  {isFollowing ? "Bỏ theo dõi" : "Theo dõi"}
+                </Button>
+              ) : (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="text-gray-400 cursor-not-allowed"
+                      disabled
+                    >
+                      Theo dõi
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Vui lòng đăng nhập để theo dõi công ty</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
           </div>
         </div>
         {/* Company Profile, Tech Stack, and Office Location Grid */}
@@ -755,7 +776,7 @@ Bạn có chắc chắn muốn thay đổi đánh giá không?`;
               ))
             ) : (
               <div className="col-span-full text-center text-muted-foreground">
-                Chưa có thông tin phúc lợi
+                Chưa có thông tin ph��c lợi
               </div>
             )}
           </div>
