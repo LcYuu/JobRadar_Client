@@ -11,29 +11,6 @@ export const formatDateTime = (dateString) => {
 };
 
 
-// Format datetime đầy đủ DD/MM/YYYY HH:mm:ss
-export const formatDateTime = (dateString) => {
-  if (!dateString) return '';
-  
-  const date = new Date(dateString);
-
-  // Chuyển múi giờ về Asia/Ho_Chi_Minh
-  const offset = date.getTimezoneOffset() * 60000;
-  const localTime = date.getTime() - offset + (7 * 3600000);
-  
-  const adjustedDate = new Date(localTime);
-
-  return adjustedDate.toLocaleString('vi-VN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  });
-};
-
 
 
 // Format date cho input type="date"
