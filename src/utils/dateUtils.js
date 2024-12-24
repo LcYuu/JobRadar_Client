@@ -1,21 +1,15 @@
-// Format date chuẩn DD/MM/YYYY
-export const formatDate = (dateString) => {
-  if (!dateString) return '';
-  
-  const date = new Date(dateString);
-  
-  // Chuyển múi giờ về Asia/Ho_Chi_Minh
-  const offset = date.getTimezoneOffset() * 60000; // Lấy độ lệch múi giờ của trình duyệt
-  const localTime = date.getTime() - offset + (7 * 3600000); // Cộng thêm múi giờ +7
-  
-  const adjustedDate = new Date(localTime);
+import { utcToZonedTime, format } from 'date-fns-tz';
 
-  return adjustedDate.toLocaleDateString('vi-VN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
+// Định dạng datetime đầy đủ
+export const formatDateTime = (dateString) => {
+  if (!dateString) return '';
+
+  const timeZone = 'Asia/Ho_Chi_Minh'; // Múi giờ Việt Nam
+  const zonedDate = utcToZonedTime(new Date(dateString), timeZone);
+
+  return format(zonedDate, 'dd/MM/yyyy HH:mm:ss', { timeZone });
 };
+
 
 // Format datetime đầy đủ DD/MM/YYYY HH:mm:ss
 export const formatDateTime = (dateString) => {
