@@ -18,8 +18,8 @@ import {
 import { validateTaxCode } from "../../redux/Company/company.action";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
-import { formatDate } from "../../utils/dateUtils";
-import { convertToVNTimezone } from '../../utils/dateUtils';
+import { formatDate, convertToVNTimezone } from "../../utils/dateUtils";
+
 
 const JobManagement = () => {
   const work = [
@@ -100,7 +100,7 @@ const JobManagement = () => {
         size
       )
     );
-    toast.success("Dừng tuyển dụng công vi��c thành công");
+    toast.success("Dừng tuyển dụng công việc thành công");
   };
 
   useEffect(() => {
@@ -145,7 +145,7 @@ const JobManagement = () => {
   //     // Tạo một đối tượng mới với tất cả các cột đã được đặt lại thành null
   //     const newSort = prevState[column] === "ASC" ? "DESC" : "ASC";
   //     const newState = {
-  //       [column]: newSort, // Cập nhật giá tr�� của ct hiện tại
+  //       [column]: newSort, // Cập nhật giá trị của ct hiện tại
   //     };
 
   //     // Đặt các cột còn lại thành null
@@ -279,7 +279,7 @@ const JobManagement = () => {
                       className={`px-3 py-1 rounded-full text-sm ${
                         job.status === "Đang mở"
                           ? "bg-emerald-100 text-emerald-600" // Màu xanh lá cho "Đang mở"
-                          : job.status === "Hết hạn"
+                          : job.status === "Hết h��n"
                           ? "bg-red-100 text-red-600" // Màu đỏ cho "Hết hạn"
                           : "bg-yellow-100 text-yellow-600" // Màu vàng cho "Chờ duyệt"
                       }`}
@@ -287,8 +287,8 @@ const JobManagement = () => {
                       {job.status}
                     </span>
                   </td>
-                  <td className="p-4">{formatDate(job?.createDate)}</td>
-                  <td className="p-4">{formatDate(job?.expireDate)}</td>
+                  <td className="p-4">{formatDate(convertToVNTimezone(job?.createDate))}</td>
+                  <td className="p-4">{formatDate(convertToVNTimezone(job?.expireDate))}</td>
                   <td className="p-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-600">
                       {job?.typeOfWork}

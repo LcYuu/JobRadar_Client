@@ -8,8 +8,11 @@ export const convertToVNTimezone = (dateString) => {
     return '';
   }
 
-  // Chuyển đổi sang múi giờ Việt Nam
-  return new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
+  // Tạo date string với múi giờ cụ thể của Việt Nam
+  return new Date(date.toLocaleString('en-US', { 
+    timeZone: 'Asia/Ho_Chi_Minh',
+    hour12: false 
+  }));
 };
 
 // Format date chuẩn DD/MM/YYYY
