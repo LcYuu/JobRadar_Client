@@ -1,11 +1,12 @@
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, addHours } from 'date-fns';
 import { vi } from 'date-fns/locale';
 
 // Format date chuẩn DD/MM/YYYY
 export const formatDate = (dateString) => {
   if (!dateString) return '';
   
-  const date = parseISO(dateString);
+  // Parse ISO string và thêm 7 giờ cho múi giờ Việt Nam
+  const date = addHours(parseISO(dateString), 7);
   return format(date, 'dd/MM/yyyy', { locale: vi });
 };
 
@@ -13,7 +14,8 @@ export const formatDate = (dateString) => {
 export const formatDateTime = (dateString) => {
   if (!dateString) return '';
   
-  const date = parseISO(dateString);
+  // Parse ISO string và thêm 7 giờ cho múi giờ Việt Nam
+  const date = addHours(parseISO(dateString), 7);
   return format(date, 'dd/MM/yyyy HH:mm:ss', { locale: vi });
 };
 
@@ -21,7 +23,8 @@ export const formatDateTime = (dateString) => {
 export const formatDateForInput = (dateString) => {
   if (!dateString) return '';
   
-  const date = parseISO(dateString);
+  // Parse ISO string và thêm 7 giờ cho múi giờ Việt Nam
+  const date = addHours(parseISO(dateString), 7);
   return format(date, 'yyyy-MM-dd');
 };
 
@@ -29,9 +32,10 @@ export const formatDateForInput = (dateString) => {
 export const calculateRemainingDays = (dateString) => {
   if (!dateString) return 0;
   
-  const expireDate = parseISO(dateString);
+  const expireDate = addHours(parseISO(dateString), 7);
   const now = new Date();
+  const vnNow = addHours(now, 7);
   
-  const remainingDays = Math.ceil((expireDate - now) / (1000 * 60 * 60 * 24));
+  const remainingDays = Math.ceil((expireDate - vnNow) / (1000 * 60 * 60 * 24));
   return remainingDays;
 };
