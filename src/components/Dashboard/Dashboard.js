@@ -8,7 +8,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useDispatch, useSelector } from "react-redux";
 import { getApplyJobByUser } from "../../redux/ApplyJob/applyJob.action";
 import Pagination from "../layout/Pagination";
-import { formatDateTime, convertToVNTimezone } from '../../utils/dateUtils';
+import { formatDateTime } from '../../utils/dateUtils';
 
 export default function Dashboard_Seeker() {
   const dispatch = useDispatch();
@@ -100,7 +100,7 @@ export default function Dashboard_Seeker() {
                           {app.companyName} • {app.location} • {app.typeOfWork}
                         </p>
                         <span className="text-sm text-gray-500">
-                        Thời gian ứng tuyển: {formatDateTime(convertToVNTimezone(app.applyDate))}
+                        Thời gian ứng tuyển: {formatDateTime(app.applyDate)}
                         </span>
                       </div>
                     </div>

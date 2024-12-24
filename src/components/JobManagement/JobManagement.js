@@ -18,7 +18,7 @@ import {
 import { validateTaxCode } from "../../redux/Company/company.action";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
-import { formatDate, convertToVNTimezone } from "../../utils/dateUtils";
+import { formatDate, formatDateTime } from "../../utils/dateUtils";
 
 
 const JobManagement = () => {
@@ -181,7 +181,7 @@ const JobManagement = () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-semibold"></h1>
+          <h1 className="text-2xl font-semibold">.</h1>
           {/* <p className="text-gray-500 mt-1">Đây là danh sách việc làm từ {selectedDate}.</p> */}
         </div>
 
@@ -279,7 +279,7 @@ const JobManagement = () => {
                       className={`px-3 py-1 rounded-full text-sm ${
                         job.status === "Đang mở"
                           ? "bg-emerald-100 text-emerald-600" // Màu xanh lá cho "Đang mở"
-                          : job.status === "Hết h��n"
+                          : job.status === "Hết hạn"
                           ? "bg-red-100 text-red-600" // Màu đỏ cho "Hết hạn"
                           : "bg-yellow-100 text-yellow-600" // Màu vàng cho "Chờ duyệt"
                       }`}
@@ -287,8 +287,8 @@ const JobManagement = () => {
                       {job.status}
                     </span>
                   </td>
-                  <td className="p-4">{formatDate(convertToVNTimezone(job?.createDate))}</td>
-                  <td className="p-4">{formatDate(convertToVNTimezone(job?.expireDate))}</td>
+                  <td className="p-4">{formatDate(job?.createDate)}</td>
+                  <td className="p-4">{formatDate(job?.expireDate)}</td>
                   <td className="p-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-600">
                       {job?.typeOfWork}
@@ -314,7 +314,7 @@ const JobManagement = () => {
                           style={{
                             display:
                               job.expireDate &&
-                              convertToVNTimezone(job.expireDate) < convertToVNTimezone(new Date())
+                              formatDateTime(job.expireDate) < formatDateTime(new Date())
                                 ? "none"
                                 : "block",
                           }}

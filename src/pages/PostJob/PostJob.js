@@ -29,9 +29,6 @@ import { getCity } from "../../redux/City/city.action";
 import Swal from "sweetalert2";
 import { 
   formatDate, 
-  formatDateTime, 
-  calculateRemainingDays,
-  convertToVNTimezone 
 } from '../../utils/dateUtils';
 
 const cityCodeMapping = {
@@ -321,8 +318,8 @@ const PostJob = () => {
         tempErrors.expireDate = "Vui lòng chọn ngày hết hạn.";
         isValid = false;
       } else {
-        const vnExpireDate = convertToVNTimezone(jobData.expireDate);
-        const vnNow = convertToVNTimezone(new Date());
+        const vnExpireDate = formatDate(jobData.expireDate);
+        const vnNow = formatDate(new Date());
         
         if (vnExpireDate <= vnNow) {
           tempErrors.expireDate = "Ngày hết hạn phải lớn hơn ngày hiện tại.";
