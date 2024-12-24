@@ -255,7 +255,7 @@ Bạn có chắc chắn muốn thay đổi đánh giá không?`;
 
   const handleFollowClick = async () => {
     // Kiểm tra đăng nhập
-    const isLoggedIn = sessionStorage.getItem("token");
+    const isLoggedIn = sessionStorage.getItem("jwt");
     
     if (!isLoggedIn) {
       toast.error("Vui lòng đăng nhập để theo dõi công ty!");
